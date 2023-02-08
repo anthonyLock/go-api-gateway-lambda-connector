@@ -1,4 +1,4 @@
-package algnhsa
+package goapigatewaylambdaconnector
 
 import (
 	"context"

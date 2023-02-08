@@ -1,5 +1,3 @@
-# algnhsa [![GoDoc](https://godoc.org/github.com/akrylysov/algnhsa?status.svg)](https://godoc.org/github.com/akrylysov/algnhsa) [![Build Status](https://travis-ci.org/akrylysov/algnhsa.svg?branch=master)](https://travis-ci.org/akrylysov/algnhsa)
-
 algnhsa is an AWS Lambda Go `net/http` server adapter.
 
 algnhsa enables running Go web applications on AWS Lambda and API Gateway or ALB without changing the existing HTTP handlers:
@@ -12,7 +10,7 @@ import (
     "net/http"
     "strconv"
 
-    "github.com/akrylysov/algnhsa"
+    "github.com/anthonylock/go-api-gateway-lambda-connector"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -49,7 +47,7 @@ package main
 import (
     "net/http"
 
-    "github.com/akrylysov/algnhsa"
+    "github.com/anthonylock/go-api-gateway-lambda-connector"
     "github.com/go-chi/chi"
 )
 
@@ -62,17 +60,17 @@ func main() {
 }
 ```
 
-## Setting up API Gateway 
+## Setting up API Gateway
 
 1. Create a new REST API.
 
 2. In the "Resources" section create a new `ANY` method to handle requests to `/` (check "Use Lambda Proxy Integration").
 
-    ![API Gateway index](https://akrylysov.github.io/algnhsa/apigateway-index.png)
+   ![API Gateway index](https://akrylysov.github.io/algnhsa/apigateway-index.png)
 
 3. Add a catch-all `{proxy+}` resource to handle requests to every other path (check "Configure as proxy resource").
 
-    ![API Gateway catch-all](https://akrylysov.github.io/algnhsa/apigateway-catchall.png)
+   ![API Gateway catch-all](https://akrylysov.github.io/algnhsa/apigateway-catchall.png)
 
 ## Setting up ALB
 
