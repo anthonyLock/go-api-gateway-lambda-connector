@@ -1,4 +1,4 @@
-module github.com/anthonylock/go-api-gateway-lambda-connector
+module github.com/anthonyLock/go-api-gateway-lambda-connector
 
 go 1.12
 

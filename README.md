@@ -10,7 +10,7 @@ import (
     "net/http"
     "strconv"
 
-    "github.com/anthonylock/go-api-gateway-lambda-connector"
+    "github.com/anthonyLock/go-api-gateway-lambda-connector"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -47,7 +47,7 @@ package main
 import (
     "net/http"
 
-    "github.com/anthonylock/go-api-gateway-lambda-connector"
+    "github.com/anthonyLock/go-api-gateway-lambda-connector"
     "github.com/go-chi/chi"
 )
 
