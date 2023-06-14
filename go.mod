@@ -1,6 +1,6 @@
 module github.com/anthonyLock/go-api-gateway-lambda-connector
 
-go 1.12
+go 1.19
 
 require (
 	github.com/aws/aws-lambda-go v1.27.0

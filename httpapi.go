@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"path"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 )
@@ -22,6 +23,8 @@ func newAPIGatewayV2HTTPRequest(ctx context.Context, payload []byte, opts *Optio
 		return lambdaRequest{}, errAPIGatewayV2UnexpectedRequest
 	}
 
+	//Add cookie to header.
+	event.Headers["Cookie"] = strings.Join(event.Cookies, ",")
 	req := lambdaRequest{
 		HTTPMethod:            event.RequestContext.HTTP.Method,
 		Path:                  event.RequestContext.HTTP.Path,
