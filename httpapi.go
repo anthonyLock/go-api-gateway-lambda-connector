@@ -24,7 +24,7 @@ func newAPIGatewayV2HTTPRequest(ctx context.Context, payload []byte, opts *Optio
 	}
 
 	//Add cookie to header.
-	event.Headers["Cookie"] = strings.Join(event.Cookies, "")
+	event.Headers["Cookie"] = strings.Join(event.Cookies, ";")
 	req := lambdaRequest{
 		HTTPMethod:            event.RequestContext.HTTP.Method,
 		Path:                  event.RequestContext.HTTP.Path,
