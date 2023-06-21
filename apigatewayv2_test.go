@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"io"
+	"log"
 	"net/http"
 	"testing"
 
@@ -83,6 +84,11 @@ var testV2Request = `{
 
 func TestAPIGatewayV2(t *testing.T) {
 	h := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Print(r.Header)
+		if r.Header != nil {
+			t.Errorf("expected header %q, got %q", "/my/path", r.Header)
+
+		}
 		if r.URL.Path != "/my/path" {
 			t.Errorf("expected path %q, got %q", "/my/path", r.URL.Path)
 		}
