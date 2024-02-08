@@ -25,15 +25,23 @@ func newAPIGatewayV2HTTPRequest(ctx context.Context, payload []byte, opts *Optio
 
 	//Add cookie to header.
 	event.Headers["Cookie"] = strings.Join(event.Cookies, ";")
+
 	req := lambdaRequest{
-		HTTPMethod:            event.RequestContext.HTTP.Method,
-		Path:                  event.RequestContext.HTTP.Path,
-		QueryStringParameters: event.QueryStringParameters,
-		Headers:               event.Headers,
-		Body:                  event.Body,
-		IsBase64Encoded:       event.IsBase64Encoded,
-		SourceIP:              event.RequestContext.HTTP.SourceIP,
-		Context:               newAPIGatewayV2HTTPRequestContext(ctx, event),
+		HTTPMethod:      event.RequestContext.HTTP.Method,
+		Path:            event.RequestContext.HTTP.Path,
+		Headers:         event.Headers,
+		Body:            event.Body,
+		IsBase64Encoded: event.IsBase64Encoded,
+		SourceIP:        event.RequestContext.HTTP.SourceIP,
+		Context:         newAPIGatewayV2HTTPRequestContext(ctx, event),
+	}
+	for k, v := range event.QueryStringParameters {
+		if strings.Contains(v, ",") {
+			req.MultiValueQueryStringParameters[k] = strings.Split(v, ",")
+		} else {
+			req.QueryStringParameters[k] = v
+
+		}
 	}
 
 	if opts.UseProxyPath {
