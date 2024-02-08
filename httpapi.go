@@ -27,13 +27,15 @@ func newAPIGatewayV2HTTPRequest(ctx context.Context, payload []byte, opts *Optio
 	event.Headers["Cookie"] = strings.Join(event.Cookies, ";")
 
 	req := lambdaRequest{
-		HTTPMethod:      event.RequestContext.HTTP.Method,
-		Path:            event.RequestContext.HTTP.Path,
-		Headers:         event.Headers,
-		Body:            event.Body,
-		IsBase64Encoded: event.IsBase64Encoded,
-		SourceIP:        event.RequestContext.HTTP.SourceIP,
-		Context:         newAPIGatewayV2HTTPRequestContext(ctx, event),
+		HTTPMethod:            event.RequestContext.HTTP.Method,
+		Path:                  event.RequestContext.HTTP.Path,
+		Headers:               event.Headers,
+		MultiValueHeaders:     map[string][]string{},
+		QueryStringParameters: map[string]string{},
+		Body:                  event.Body,
+		IsBase64Encoded:       event.IsBase64Encoded,
+		SourceIP:              event.RequestContext.HTTP.SourceIP,
+		Context:               newAPIGatewayV2HTTPRequestContext(ctx, event),
 	}
 	for k, v := range event.QueryStringParameters {
 		if strings.Contains(v, ",") {
